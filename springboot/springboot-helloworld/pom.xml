@@ -58,6 +58,7 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                    <mainClass>pr.iceworld.fernando.springboot.helloworld.HelloWorldMainApplicationgi</mainClass>
                 </configuration>
             </plugin>
         </plugins>

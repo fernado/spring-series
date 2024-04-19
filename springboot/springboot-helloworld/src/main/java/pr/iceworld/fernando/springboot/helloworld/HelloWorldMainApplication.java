@@ -1,4 +1,4 @@
-package pr.iceworld.fernando.helloworld;
+package pr.iceworld.fernando.springboot.helloworld;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
