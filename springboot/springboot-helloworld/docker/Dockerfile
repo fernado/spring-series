@@ -1,0 +1,5 @@
+FROM 192.168.56.102:5100/p_pub/amazoncorretto:17-alpine-jdk
+#FROM amazoncorretto:17-alpine-jdk
+WORKDIR /app
+COPY springboot-helloworld.jar /app/springboot-helloworld.jar
+CMD ["java", "-jar", "springboot-helloworld.jar"]

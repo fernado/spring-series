@@ -13,9 +13,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>./springboot-read</module>
-        <module>./springboot-openfeign</module>
-        <module>./springboot-autoconfig</module>
+        <module>./springboot</module>
         <module>./springbean-lifecycle</module>
     </modules>
 
