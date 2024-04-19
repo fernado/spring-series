@@ -1,5 +1,6 @@
 package pr.iceworld.fernando.springbean.lifecycle02;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -23,5 +24,7 @@ public class TestSpringBeanLifeCycle {
 
         ((AnnotationConfigApplicationContext) applicationContext).close();
         System.out.println("24. applicationContext close invoked, but there are some left work need to do");
+
+        Assertions.assertNotNull(person);
     }
 }

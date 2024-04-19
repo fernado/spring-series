@@ -1,5 +1,6 @@
 package pr.iceworld.fernando.springboot.read;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -14,6 +15,7 @@ class SpringbootReadApplicationTests {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(ProjConfig.class);
         ClazzA clazzA = applicationContext.getBean(ClazzA.class);
         System.out.println(clazzA.getLastName());
+        Assertions.assertNotNull(clazzA);
     }
 
 }

@@ -1,5 +1,6 @@
 package pr.iceworld.fernando.springboot.autoconfig01;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.WebApplicationType;
@@ -21,6 +22,7 @@ class SpringAutoconfigApplicationTests {
         TestService testService = context.getBean("testService", TestService.class);
         System.out.println("TestService Bean: " + testService);
         context.close();
+        Assertions.assertNotNull(testService);
     }
 
 }
