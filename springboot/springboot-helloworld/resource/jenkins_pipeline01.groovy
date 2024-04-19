@@ -1,4 +1,3 @@
-```groovy
 node {
     def mvnHome
     stage('Preparation') { // for display purposes
@@ -6,7 +5,7 @@ node {
         checkout scmGit(branches: [[name: '*/${branch_name}']], extensions: [], userRemoteConfigs: [[credentialsId: 'fernado', url: 'https://github.com/${git_username}/${git_repository_path}.git']])
 
 
-        mvnHome = tool 'maven396'        
+        mvnHome = tool 'maven396'
     }
     stage('Analyze') {
         echo 'Sonaqube'
@@ -31,14 +30,14 @@ node {
     }
     stage('Test Results') {
         echo 'Test Results'
-        sh 'make check || true' 
+        sh 'make check || true'
         junit '**/target/surefire-reports/TEST-*.xml'
         archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
     }
     stage('Tag') {
         if (currentBuild.result == null) {
             echo 'Build success, Tag will be created.'
-            sh "git tag -a 'v${env.BUILD_NUMBER}' -m 'Build Number ${env.BUILD_NUMBER}'"            
+            sh "git tag -a 'v${env.BUILD_NUMBER}' -m 'Build Number ${env.BUILD_NUMBER}'"
             withCredentials([gitUsernamePassword(credentialsId: 'fernado', gitToolName: 'Default')]) {
                 sh 'git push --tags'
             }
@@ -49,7 +48,7 @@ node {
     stage('Docker Build') {
         echo 'Docker Build'
         sh 'cp springboot/springboot-helloworld/target/*.jar springboot/springboot-helloworld/docker/'
-        sh 'docker build -t springboot-helloworld springboot/springboot-helloworld/docker/.'
+        sh 'docker build -t springboot-helloworld springboot/springboot-helloworld/docker/ .'
     }
     stage('Deploy') {
         echo 'Deploy'
@@ -63,13 +62,12 @@ node {
         // }
     }
 }
-```
 
 
-```dockerfile
-FROM 192.168.56.102:5100/p_pub/amazoncorretto:17-alpine-jdk
-#FROM amazoncorretto:17-alpine-jdk
-WORKDIR ./
-COPY *.jar springboot-helloworld.jar
-CMD ["java", "-jar", "springboot-helloworld.jar"]
-```
+
+//dockerfile
+//FROM 192.168.56.102:5100/p_pub/amazoncorretto:17-alpine-jdk
+//#FROM amazoncorretto:17-alpine-jdk
+//WORKDIR ./
+//COPY *.jar springboot-helloworld.jar
+//CMD ["java", "-jar", "springboot-helloworld.jar"]
