@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>pr.iceworld.fernando</groupId>
+    <artifactId>spring-series</artifactId>
+    <version>0.1</version>
+    <name>spring-series</name>
+    <description>spring-series</description>
+    <properties>
+        <java.version>17</java.version>
+    </properties>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>./springboot-read</module>
+        <module>./springboot-openfeign</module>
+        <module>./springboot-autoconfig</module>
+        <module>./springbean-lifecycle</module>
+    </modules>
+
+        <distributionManagement>
+            <repository>
+                <id>maven-releases</id>
+                <url>http://192.168.56.102:8081/repository/maven-releases/</url>
+            </repository>
+            <snapshotRepository>
+                <id>maven-snapshots</id>
+                <url>http://192.168.56.102:8081/repository/maven-snapshots/</url>
+            </snapshotRepository>
+        </distributionManagement>
+
+        <repositories>
+            <repository>
+                <id>maven-public</id>
+                <url>http://192.168.56.102:8081/repository/maven-public/</url>
+                <releases>
+                    <enabled>true</enabled>
+                </releases>
+                <snapshots>
+                    <enabled>true</enabled>
+                </snapshots>
+            </repository>
+        </repositories>
+
+        <!--防止pom中的jar包从私服下载之后，执行mvn 插件仍然从中央仓库中下载-->
+        <pluginRepositories>
+            <pluginRepository>
+                <id>maven-public</id>
+                <url>http://192.168.56.102:8081/repository/maven-public/</url>
+            </pluginRepository>
+        </pluginRepositories>
+</project>

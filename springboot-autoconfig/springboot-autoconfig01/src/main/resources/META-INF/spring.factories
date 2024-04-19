@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+pr.iceworld.fernando.springboot.autoconfig01.config.HelloWorldAutoConfiguration

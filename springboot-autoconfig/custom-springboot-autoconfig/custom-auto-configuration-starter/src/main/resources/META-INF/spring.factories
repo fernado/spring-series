@@ -1,0 +1,3 @@
+#org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+#        pr.iceworld.fernando.log.autoconfig.LogAutoConfiguration,\
+#        pr.iceworld.fernando.log.autoconfig.GreeterAutoConfiguration
