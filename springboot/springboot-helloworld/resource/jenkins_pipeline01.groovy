@@ -2,9 +2,7 @@ node {
     def mvnHome
     stage('Preparation') { // for display purposes
         echo 'Checkout'
-        checkout scmGit(branches: [[name: '*/${branch_name}']], extensions: [], userRemoteConfigs: [[credentialsId: 'fernado', url: 'https://github.com/${git_username}/${git_repository_path}.git']])
-
-
+        checkout scmGit(branches: [[name: '*/${branch_name}']], extensions: [], userRemoteConfigs: [[credentialsId: 'fernado', url: 'https://github.com/fernado/spring-series.git']])
         mvnHome = tool 'maven396'
     }
     stage('Analyze') {
