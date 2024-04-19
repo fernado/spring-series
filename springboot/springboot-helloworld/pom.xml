@@ -51,6 +51,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
                     <excludes>
                         <exclude>
@@ -58,7 +66,8 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
-                    <mainClass>pr.iceworld.fernando.springboot.helloworld.HelloWorldMainApplicationgi</mainClass>
+                    <includeSystemScope>true</includeSystemScope>
+                    <mainClass>pr.iceworld.fernando.springboot.helloworld.HelloWorldMainApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
