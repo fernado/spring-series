@@ -1,7 +1,4 @@
 pipeline {
-// need parameters
-// tag_value:v1.1.26 -- increment as deploy each time
-// branch_name:main -- branch
     agent any
 
     environment {
@@ -13,7 +10,7 @@ pipeline {
         harbor_repo = "p_pub"
     }
 
-    stages{
+    stages {
 
         stage('Preparation') { // for display purposes
             steps {
@@ -41,8 +38,8 @@ pipeline {
             steps {
                 echo 'Test Results'
                 sh 'make check || true'
-                junit '**/target/surefire-reports/TEST-*.xml'
-                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+                junit 'springboot/${project_name}/target/surefire-reports/TEST-*.xml'
+                archiveArtifacts artifacts: 'springboot/${project_name}/target/*.jar', fingerprint: true
             }
         }
 
@@ -82,59 +79,11 @@ pipeline {
             }
         }
 
-        // if local environment need this
-        stage('Pull image from remote repository') {
+        stage('Push image to remote k8smaster') {
             steps {
-                echo 'Pull image to remote repository start'
-                script {
-                    sh '''
-                    image_name=$harbor_url/$harbor_repo/$project_name:${tag_value}
-                    containerId=`docker ps -a | grep ${project_name} | awk '{print $1}'`
-                    echo $containerId
-                    if [ "$containerId" != "" ]; then
-                      docker stop $containerId
-                      docker rm $containerId
-                    else
-                      echo 'No' $project_name 'container is running'
-                    fi 
-                    tag_version=`docker images | grep ${project_name} | awk '{print $2}'`
-                    echo tag_version = ${tag_version}
-                    echo tag_value = ${tag_value}
-            
-                    if [[ "$tag_version" != "" && "$tag_version" =~ "${tag_value}" ]]; then
-                      docker images | grep ${project_name} | awk '{print $3}' | xargs docker rmi -f
-                    fi
-                    
-                    docker login -u $harbor_user -p $harbor_passwd ${harbor_url}
-                    echo $image_name
-                    docker pull ${image_name}
-                    '''
-                }
-            }
-
-        }
-
-        stage('Deploy to current') {
-            steps {
-                echo 'Deploy to current start'
-                sh '''
-                image_name=$harbor_url/$harbor_repo/$project_name:${tag_value}
-                docker run -d -p ${project_port}:${project_port} --name ${project_name} ${image_name}
-                '''
-                echo 'Deploy to current done'
+                sshPublisher(publishers: [sshPublisherDesc(configName: 'k8smaster', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'springboot/spring-series/docker/springboot-helloworld.yaml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
         }
 
-        stage('Deploy to remote') {
-            steps {
-                echo 'Deploy to remote, not implement yet'
-                // notice target server which image it need pull
-                // delete the running container in target server
-                // delete the image in target server
-                // target server pull image from harbor
-                // make a running container based on pulled image
-            }
-        }
     }
-
 }
