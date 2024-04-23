@@ -81,7 +81,31 @@ pipeline {
 
         stage('Push image to remote k8smaster') {
             steps {
-                sshPublisher(publishers: [sshPublisherDesc(configName: 'k8smaster', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'springboot/spring-series/docker/springboot-helloworld.yaml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                sshPublisher(
+                        publishers: [
+                                sshPublisherDesc(
+                                        configName: 'k8smaster',
+                                        transfers: [
+                                                sshTransfer(
+                                                        cleanRemote: false,
+                                                        excludes: '',
+                                                        execCommand: '',
+                                                        execTimeout: 120000,
+                                                        flatten: false,
+                                                        makeEmptyDirs: false,
+                                                        noDefaultExcludes: false,
+                                                        patternSeparator: '[, ]+',
+                                                        remoteDirectory: '',
+                                                        remoteDirectorySDF: false,
+                                                        removePrefix: 'springboot/springboot-helloworld/docker',
+                                                        sourceFiles: 'springboot/springboot-helloworld/docker/springboot-helloworld.yaml'
+                                                )],
+                                        usePromotionTimestamp: false,
+                                        useWorkspaceInPromotion: false,
+                                        verbose: false
+                                )
+                        ]
+                )
             }
         }
 

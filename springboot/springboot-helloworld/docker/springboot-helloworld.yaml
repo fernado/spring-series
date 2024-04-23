@@ -16,7 +16,7 @@ spec:
           app: springboot-helloworld
       spec:
         container:
-        - name: pipeline
+        - name: springboot-helloworld
           image: 192.168.56.102:5100/p_pub/springboot-helloworld:v1.1.93
           imagePullPolicy: Always
           ports:
