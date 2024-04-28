@@ -5,7 +5,7 @@ import jakarta.annotation.PreDestroy;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.*;
 
-public class Person implements BeanFactoryAware, BeanNameAware, BeanClassLoaderAware,
+public class ClazzFoo implements BeanFactoryAware, BeanNameAware, BeanClassLoaderAware,
         InitializingBean, DisposableBean {
 
     private String name;
@@ -15,7 +15,7 @@ public class Person implements BeanFactoryAware, BeanNameAware, BeanClassLoaderA
     private String beanName;
     private ClassLoader classLoader;
 
-    public Person() {
+    public ClazzFoo() {
         System.out.println("9. invoke person's constructor");
     }
 
@@ -47,12 +47,12 @@ public class Person implements BeanFactoryAware, BeanNameAware, BeanClassLoaderA
 
     @PostConstruct
     public void postConstruct() {
-        System.out.println("17. invoke postConstruct() of " + Person.class.getSimpleName());
+        System.out.println("17. invoke postConstruct() of " + ClazzFoo.class.getSimpleName());
     }
 
     @PreDestroy
     public void preDestroy() {
-        System.out.println("25. invoke preDestroy() of " + Person.class.getSimpleName());
+        System.out.println("25. invoke preDestroy() of " + ClazzFoo.class.getSimpleName());
     }
 
     // BeanFactoryAware
@@ -83,12 +83,12 @@ public class Person implements BeanFactoryAware, BeanNameAware, BeanClassLoaderA
 
     // init-method in bean's annotation
     public void customInitMethod() {
-        System.out.println("19. invoke bean of " + Person.class.getSimpleName() + "'s init-method");
+        System.out.println("19. invoke bean of " + ClazzFoo.class.getSimpleName() + "'s init-method");
     }
 
     // destroy-method in bean's annotation
     public void customDestroyMethod() {
-        System.out.println("27. invoke bean of " + Person.class.getSimpleName() + "'s destroy-method");
+        System.out.println("27. invoke bean of " + ClazzFoo.class.getSimpleName() + "'s destroy-method");
     }
 
     @Override

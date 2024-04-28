@@ -1,37 +1,40 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    namespace: test20240421
-    name: springboot-helloworld
-    labels:
-      app: springboot-helloworld
+  namespace: test20240421
+  name: springboot-helloworld
+  labels:
+    app: springboot-helloworld-label
 spec:
-    replicas: 2
-    selector:
-      matchLabels:
-        app: springboot-helloworld
-    template:
-      metadata:
-        labels:
-          app: springboot-helloworld
-      spec:
-        container:
-        - name: springboot-helloworld
-          image: 192.168.56.102:5100/p_pub/springboot-helloworld:v1.1.93
-          imagePullPolicy: Always
-          ports:
-          - container: 10090
+  replicas: 2
+  selector:
+    matchLabels:
+      app: springboot-helloworld-label
+  # 元数据，开始定义pod
+  template:
+    metadata:
+      # 此位置必须填写的是pod资源的label
+      labels:
+        app: springboot-helloworld-label
+    spec:
+      containers:
+      - name: springboot-helloworld-container
+        image: 192.168.56.102:5100/p_pub/springboot-helloworld:v1.1.97
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 10090
 ---
 apiVersion: v1
 kind: Service
 metadata:
   namespace: test20240421
+  name: springboot-helloworld-svc
   labels:
-    app: springboot-helloworld
-  name: springboot-helloworld
+    app: springboot-helloworld-svc-label
 spec:
+  # 标签选择器，选择要跟那个pod资源进行绑定，是pod资源label名称
   selector:
-    app: springboot-helloworld
+    app: springboot-helloworld-label
   ports:
   - port: 11090
     targetPort: 10090
@@ -41,7 +44,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   namespace: test20240421
-  name: springboot-helloworld
+  name: springboot-helloworld-ing
 spec:
   ingressClassName: ingress20240421
   rules:
@@ -52,7 +55,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: springboot-helloworld
+            name: springboot-helloworld-svc
             port:
               number: 11090
 

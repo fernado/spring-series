@@ -6,7 +6,7 @@ import org.springframework.beans.factory.config.InstantiationAwareBeanPostProces
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import pr.iceworld.fernando.springbean.lifecycle02.model.Person;
+import pr.iceworld.fernando.springbean.lifecycle02.model.ClazzFoo;
 import pr.iceworld.fernando.springbean.lifecycle02.processor.CustomBeanFactoryPostProcessor;
 import pr.iceworld.fernando.springbean.lifecycle02.processor.CustomBeanPostProcessor;
 import pr.iceworld.fernando.springbean.lifecycle02.processor.CustomInstantiationAwareBeanPostProcessor;
@@ -16,13 +16,13 @@ import pr.iceworld.fernando.springbean.lifecycle02.processor.CustomInstantiation
 public class TestProjConfig {
 
     @Bean(initMethod = "customInitMethod", destroyMethod = "customDestroyMethod")
-    public Person person() {
-        System.out.println("Load configuration bean of " + Person.class.getSimpleName());
-        Person person = new Person();
-        person.setName("Fernando");
-        person.setEducationLevel("Middle");
+    public ClazzFoo person() {
+        System.out.println("Load configuration bean of " + ClazzFoo.class.getSimpleName());
+        ClazzFoo clazzFoo = new ClazzFoo();
+        clazzFoo.setName("Fernando");
+        clazzFoo.setEducationLevel("Middle");
         System.out.println("setEducationLevel to 'Middle'");
-        return person;
+        return clazzFoo;
     }
 
     @Bean

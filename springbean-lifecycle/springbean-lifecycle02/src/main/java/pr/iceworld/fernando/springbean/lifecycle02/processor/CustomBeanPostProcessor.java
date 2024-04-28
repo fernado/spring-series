@@ -2,7 +2,7 @@ package pr.iceworld.fernando.springbean.lifecycle02.processor;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
-import pr.iceworld.fernando.springbean.lifecycle02.model.Person;
+import pr.iceworld.fernando.springbean.lifecycle02.model.ClazzFoo;
 
 public class CustomBeanPostProcessor implements BeanPostProcessor {
 
@@ -15,7 +15,7 @@ public class CustomBeanPostProcessor implements BeanPostProcessor {
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         System.out.println("20. invoke BeanPostProcessor#postProcessAfterInitialization(), be able to update property of bean");
         System.out.println(bean);
-        ((Person)bean).setEducationLevel("High");
+        ((ClazzFoo)bean).setEducationLevel("High");
         System.out.println("setEducationLevel to 'High'");
         return bean;
     }

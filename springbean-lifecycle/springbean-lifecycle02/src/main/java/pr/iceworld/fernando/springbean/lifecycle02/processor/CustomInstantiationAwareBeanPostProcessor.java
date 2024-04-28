@@ -3,7 +3,7 @@ package pr.iceworld.fernando.springbean.lifecycle02.processor;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.PropertyValues;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
-import pr.iceworld.fernando.springbean.lifecycle02.model.Person;
+import pr.iceworld.fernando.springbean.lifecycle02.model.ClazzFoo;
 
 public class CustomInstantiationAwareBeanPostProcessor implements InstantiationAwareBeanPostProcessor {
 
@@ -25,7 +25,7 @@ public class CustomInstantiationAwareBeanPostProcessor implements InstantiationA
             throws BeansException {
         System.out.println("21. invoke InstantiationAwareBeanPostProcessor#postProcessAfterInitialization(bean, beanName)");
         System.out.println(bean);
-        ((Person)bean).setEducationLevel("University");
+        ((ClazzFoo)bean).setEducationLevel("University");
         System.out.println("setEducationLevel to 'University'");
         return bean;
     }

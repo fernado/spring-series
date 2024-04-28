@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import pr.iceworld.fernando.springbean.lifecycle02.config.TestProjConfig;
-import pr.iceworld.fernando.springbean.lifecycle02.model.Person;
+import pr.iceworld.fernando.springbean.lifecycle02.model.ClazzFoo;
 
 public class TestSpringBeanLifeCycle {
 
@@ -16,8 +16,8 @@ public class TestSpringBeanLifeCycle {
         System.out.println("3. is going to scan config file (annotated configuration class), and register all bean to beanDefinition");
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(TestProjConfig.class);
         System.out.println("22. applicationContext instantiated end");
-        Person person = applicationContext.getBean(Person.class);
-        System.out.println("23. created Person " + person);
+        ClazzFoo clazzFoo = applicationContext.getBean(ClazzFoo.class);
+        System.out.println("23. created Person " + clazzFoo);
 
         // ((AnnotationConfigApplicationContext)applicationContext).registerShutdownHook();
         // System.out.println("24. registerShutdownHook");
@@ -25,6 +25,6 @@ public class TestSpringBeanLifeCycle {
         ((AnnotationConfigApplicationContext) applicationContext).close();
         System.out.println("24. applicationContext close invoked, but there are some left work need to do");
 
-        Assertions.assertNotNull(person);
+        Assertions.assertNotNull(clazzFoo);
     }
 }
