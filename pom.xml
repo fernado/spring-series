@@ -13,8 +13,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>./springboot</module>
-        <module>./springbean-lifecycle</module>
+        <module>springboot</module>
+        <module>springbean</module>
     </modules>
 
         <distributionManagement>
